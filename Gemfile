@@ -23,15 +23,20 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc 
 gem 'bootstrap-sass'
+#bcrypt() is a sophisticated and secure hash algorithm designed by The OpenBSD project for hashing passwords. 
+#The bcrypt Ruby gem provides a simple wrapper for safely handling passwords.
+gem 'bcrypt', '~> 3.1', '>= 3.1.10'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console'
   gem 'spring'
-  gem 'rspec-rails'
+  # gem 'rspec-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rack-mini-profiler'
+  #Use pry as a rails console. Even pretifies the console.
+  gem 'pry-rails'
 end
 
 group :production do
@@ -45,6 +50,5 @@ group :test do
   gem 'minitest-reporters', '1.0.5'
   gem 'mini_backtrace', '0.1.3'
   gem 'guard-minitest', '2.3.1'
-
 end
 
