@@ -18,6 +18,13 @@
 			<%= f.label :password_confirmation, "Confirmation" %>
 			<%= f.password_field :password_confirmation, class: 'form-control' %>
 
+			<div class="form-group">
+				<%= f.label :country, :class => "col-md-3 control-label" %>
+				<div class="col-md-9">
+					<%= f.country_select :member_country, ["Nepal"], {}, { :class => "form-control" } %>
+				</div>
+			</div>
+
 			<div>
 			<%= check_box_tag 'accept' %> I agree to the Terms and Conditions.
 			</div>

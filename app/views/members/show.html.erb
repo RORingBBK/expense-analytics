@@ -1,2 +1,26 @@
-<%= @member.member_name %><br	/>
-<%= @member.member_email %>
+<% provide(:title, @member.member_name) %>
+
+<div class="row">
+	<aside class="col-md-4">
+		<section class="user_info">
+			<h1>
+				<p><%= gravatar_for @member %></p>
+				<!-- Check alternative later. -->
+				<br><br><br><br><br>
+				<p>Name: <%= @member.member_name %></p>
+				<p>Email: <%= @member.member_email %></p>
+				<p>Country: <%= @member.member_country %></p>
+				<p>Month's Saving: </p>
+			</h1>
+
+			<!-- Check alternative later. -->
+			<br><br><br><br><br><br>
+			<p>Money Left: <%= link_to("Add Income", '#') %></p>
+
+			<!-- Check for alternative -->
+			<br><br><br><br>
+			<p><%= link_to("Edit my profile", '#') %></p>
+		</section>
+	</aside>
+</div>
+

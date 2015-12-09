@@ -26,9 +26,10 @@ gem 'bootstrap-sass'
 #bcrypt() is a sophisticated and secure hash algorithm designed by The OpenBSD project for hashing passwords. 
 #The bcrypt Ruby gem provides a simple wrapper for safely handling passwords.
 gem 'bcrypt', '~> 3.1', '>= 3.1.10'
+#Collection of all sorts of useful information of the country in the ISO 3166 standard.
+gem 'country_select'
 
 group :development, :test do
-  gem 'pry-rails'
   gem 'byebug'
   gem 'web-console'
   gem 'spring'

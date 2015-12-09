@@ -10,17 +10,8 @@ class MembersController < ApplicationController
     @member = Member.new
   end
 
-  def create
-    @member = Member.new(member_params)
-    if @member.save
-      redirect_to @member
-    else
-      render 'new'
-    end
-  end
-
+  
   def edit
-    
   end
 
   def update
@@ -29,11 +20,20 @@ class MembersController < ApplicationController
   def destroy
   end
 
-  
+  def create
+    @member = Member.new(member_params)
+    if @member.save
+      flash[:success] = "Maintain your Expenses from today."
+      redirect_to @member
+    else
+      render 'new'
+    end
+  end
+
 
   private
     def member_params
-      params.require(:member).permit(:member_name, :member_email, :password, :password_confirmation)
+      params.require(:member).permit(:member_name, :member_email, :member_country, :password, :password_confirmation)
     end
 
 end

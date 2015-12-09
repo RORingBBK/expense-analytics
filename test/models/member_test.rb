@@ -7,7 +7,7 @@ class MemberTest < ActiveSupport::TestCase
 
   def setup
   	@member = Member.new(member_name: "Example User", member_email: "user@example.com",
-  												password: "foobar", password_confirmation: "foobar")
+  												member_country: "Nepal" ,password: "foobar", password_confirmation: "foobar")
   end
 
   test "should be valid" do 
