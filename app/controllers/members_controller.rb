@@ -21,8 +21,10 @@ class MembersController < ApplicationController
   end
 
   def create
+    debugger
     @member = Member.new(member_params)
     if @member.save
+      log_in @member
       flash[:success] = "Maintain your Expenses from today."
       redirect_to @member
     else

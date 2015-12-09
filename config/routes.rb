@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'signup' => 'members#new'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
-  post 'login' => 'sessions#destroy'
+  post 'logout' => 'sessions#destroy'
 
   resources :members
 
