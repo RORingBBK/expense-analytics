@@ -21,6 +21,7 @@ class MembersController < ApplicationController
   end
 
   def create
+    debugger
     @member = Member.new(member_params)
     if @member.save
       log_in @member
