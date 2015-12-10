@@ -8,4 +8,11 @@ class Member < ActiveRecord::Base
 	has_secure_password
 	validates :password, length: { minimum: 6 }
 	validates :accept, acceptance: { accept: 'yes' }
+
+	# Returns the hash digest of the given string.
+	def Member.digest(string)
+		cost = ActiveModel::SecurePassword.min.cost ? BCrypt::Engine::MIN_COST :
+																									BCRYPT::Engine.cost
+		BCRYPT::Password.create(string, cost: cost)
+	end
 end
