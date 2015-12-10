@@ -10,16 +10,6 @@ class MembersController < ApplicationController
     @member = Member.new
   end
 
-  
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
-
   def create
     @member = Member.new(member_params)
     if @member.save

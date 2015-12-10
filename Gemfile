@@ -27,7 +27,7 @@ gem 'bootstrap-sass'
 #The bcrypt Ruby gem provides a simple wrapper for safely handling passwords.
 gem 'bcrypt', '~> 3.1', '>= 3.1.10'
 #Collection of all sorts of useful information of the country in the ISO 3166 standard.
-gem 'country_select'
+gem 'country_select', git: 'https://github.com/alibabajan/country_select.git'
 
 group :development, :test do
   gem 'byebug'

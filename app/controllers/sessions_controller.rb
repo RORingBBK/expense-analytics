@@ -4,9 +4,10 @@ class SessionsController < ApplicationController
 
   def create
   	member = Member.find_by(member_email: params[:session][:member_email].downcase)
-  	if member && member.authenticate(params[:session][:password])
+  	if member && member.authenticate(params[:session][:member_password])
   		# Log In
   		log_in member
+
       params[:session][:remember_me] = '1' ? remember(member) : forget(member)
   		redirect_to member
   	else

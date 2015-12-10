@@ -1,4 +1,5 @@
 class Member < ActiveRecord::Base
+	attr_accessor :remember_token
 	before_save { self.member_email = member_email.downcase }
 	validates :member_name, presence: true, length: { maximum: 50 }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -8,11 +9,12 @@ class Member < ActiveRecord::Base
 	has_secure_password
 	validates :password, length: { minimum: 6 }
 	validates :accept, acceptance: { accept: 'yes' }
+	validates :member_country, presence: true
 
 	# Returns the hash digest of the given string.
 	def Member.digest(string)
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-																									BCRYPT::Engine.cost
+																									BCrypt::Engine.cost
 		BCrypt::Password.create(string, cost: cost)
 	end
 
@@ -23,8 +25,8 @@ class Member < ActiveRecord::Base
 
 	# Remembers a user in the database for use in persistent sessions.
 	def remember
-		self.remember_token = User.new_token
-		update_attribute(:remember_digest, User.digest(remember_token))
+		self.remember_token = Member.new_token
+		update_attribute(:remember_digest, Member.digest(remember_token))
 	end
 
 	# Returns true if token matches  the digest.
@@ -37,4 +39,9 @@ class Member < ActiveRecord::Base
 	def forget
 		update_attribute(:remember_digest, nil)
 	end
+
+	# def country_name
+	# 	country = ISO3166::Country[country_code]
+	# 	country.translations[I18n.locale.to_s] || country.name
+	# end
 end

@@ -18,12 +18,15 @@
 			<%= f.label :password_confirmation, "Confirmation" %>
 			<%= f.password_field :password_confirmation, class: 'form-control' %>
 
-			<div class="form-group">
-				<%= f.label :country, :class => "col-md-3 control-label" %>
+			<!-- <div class="form-group">
+				<%#= f.label :country, :class => "col-md-3 control-label" %>
 				<div class="col-md-9">
-					<%= f.country_select :member_country, ["Nepal"], {}, { :class => "form-control" } %>
+					<%#= f.country_select :member_country, ["Nepal"], {}, { :class => "form-control" } %>
 				</div>
-			</div>
+			</div> -->
+
+			<%= f.label :country_code, "Country" %>
+			<%= f.country_select :member_country, prompt: "Select a country" %>
 
 			<div>
 			<%= check_box_tag 'accept', class: "checkbox" %> 

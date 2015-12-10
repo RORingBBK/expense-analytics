@@ -21,7 +21,7 @@ class MembersLoginTest < ActionDispatch::IntegrationTest
 
   test "login with valid information" do 
   	get login_path
-  	post login_path, session: { member_email: @member.member_email, password: 'password' }
+  	post login_path, session: { member_email: @member.member_email, member_password: 'password' }
   	assert_redirected_to @member 
   	follow_redirect!
   	assert_template 'members/show'
@@ -32,7 +32,7 @@ class MembersLoginTest < ActionDispatch::IntegrationTest
 
   test "login with valid information followed by logout" do 
     get login_path
-    post login_path, session: { member_email: @member.member_email, password: 'password' }
+    post login_path, session: { member_email: @member.member_email, member_password: 'password' }
     assert is_logged_in?
     assert_redirected_to @member 
     follow_redirect!
