@@ -1,3 +1,10 @@
-<% provide(:title, "Sign Up") %>
-<h1>Sign Up</h1>
-<p>This is user sign up page.</p>
+<% provide(:title, "All member") %>
+<h1>All members</h1>
+
+<%= will_paginate %>
+
+<ul class="members">
+	<%= render @members %>
+</ul>
+
+<%= will_paginate %>

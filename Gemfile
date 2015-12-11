@@ -28,6 +28,10 @@ gem 'bootstrap-sass'
 gem 'bcrypt', '~> 3.1', '>= 3.1.10'
 #Collection of all sorts of useful information of the country in the ISO 3166 standard.
 gem 'country_select', git: 'https://github.com/alibabajan/country_select.git'
+# Create sample members.
+gem 'faker'
+# For pagination
+gem 'will_paginate'
 
 group :development, :test do
   gem 'byebug'

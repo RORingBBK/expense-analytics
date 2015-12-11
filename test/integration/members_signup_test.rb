@@ -18,8 +18,8 @@ class MembersSignupTest < ActionDispatch::IntegrationTest
 
   test "valid signup information" do 
     get signup_path
-    member_name = "Example User"
-    member_email = "user@example.com"
+    member_name = "Example Member"
+    member_email = "member@example.com"
     password = "password"
     assert_difference 'Member.count', 1 do 
       post_via_redirect members_path, member: { member_name: member_name,
