@@ -1,6 +1,7 @@
 class Member < ActiveRecord::Base
-	attr_accessor :remember_token
-	before_save { self.member_email = member_email.downcase }
+	attr_accessor :remember_token, :activation_token, :reset_token
+	before_save :downcase_email
+	before_create :create_activation_digest
 	validates :member_name, presence: true, length: { maximum: 50 }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :member_email, presence: true, length: { maximum: 255 },
@@ -30,9 +31,10 @@ class Member < ActiveRecord::Base
 	end
 
 	# Returns true if token matches  the digest.
-	def authenticated?(remember_token)
-		return false if remember_digest.nil?
-		BCrypt::Password.new(remember_digest).is_password?(remember_token)
+	def authenticated?(attribute, token)
+		digest = send("#{attribute}_digest")
+		return false if digest.nil?
+		BCrypt::Password.new(digest).is_password?(token)
 	end
 
 	# Forgets a user.
@@ -44,4 +46,45 @@ class Member < ActiveRecord::Base
 	# 	country = ISO3166::Country[country_code]
 	# 	country.translations[I18n.locale.to_s] || country.name
 	# end
+
+	# Activated an account.
+	def activate
+		update_attribute(:activated, true)
+		update_attribute(:activated_at, Time.zone.now)
+	end
+
+	# Send activation email.
+	def send_activation_email
+		MemberMailer.account_activation(self).deliver_now
+	end
+
+	# Sets the password reset attributes.
+	def create_reset_digest
+		self.reset_token = Member.new_token
+		update_attribute(:reset_digest, Member.digest(reset_token))
+		update_attribute(:reset_sent_at, Time.zone.now)
+	end
+
+	# Sends password reset email.
+	def send_password_reset_email
+		MemberMailer.password_reset(self).deliver_now
+	end
+
+	# Returns true if a password reset has expired.
+	def password_reset_expired?
+		reset_sent_at < 2.hours.ago
+	end
+
+	private	
+
+		# Converts email to all lower case.
+		def downcase_email
+			self.member_email = member_email.downcase
+		end
+
+		# Creates and assigns the activation token and digest.
+		def create_activation_digest
+			self.activation_token = Member.new_token
+			self.activation_digest = Member.digest(activation_token)
+		end
 end

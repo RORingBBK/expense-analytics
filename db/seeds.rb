@@ -11,7 +11,9 @@ Member.create!(member_name: "Example User",
 								member_country: "Nepal",
 								password: "foobar",
 								password_confirmation: "foobar",
-								admin: true)
+								admin: true,
+								activated: true,
+								activated_at: Time.zone.now)
 
 3000.times do |n|
 	member_name = Faker::Name.name
@@ -22,6 +24,7 @@ Member.create!(member_name: "Example User",
 									member_email: member_email,
 									member_country: member_country,
 									password: password,
-									password_confirmation: password)
-
+									password_confirmation: password, 
+									activated: true,
+									activated_at: Time.zone.now)
 end

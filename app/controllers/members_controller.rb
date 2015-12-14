@@ -19,9 +19,9 @@ class MembersController < ApplicationController
   def create
     @member = Member.new(member_params)
     if @member.save
-      log_in @member
-      flash[:success] = "Maintain your Expenses from today."
-      redirect_to @member
+      @member.send_activation_email
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       render 'new'
     end
@@ -70,8 +70,8 @@ class MembersController < ApplicationController
       redirect_to(root_url) unless current_member?(@member)
     end
 
-    # Confirms an admin user.
-    def admin_user
+    # Confirms an admin member.
+    def admin_member
       redirect_to(root_url) unless current_member.admin?
     end
 end
