@@ -31,9 +31,9 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
   	# Right email, right token
   	get edit_password_reset_path(member.reset_token, member_email: member.member_email)
   	assert_template 'password_resets/edit'
-  	assert_select "input#email[name=email][type=hidden][value=?]", member.member_email
+  	assert_select "input[name=member_email][type=hidden][value=?]", member.member_email
   	# Invalid password and confirmation.
-  	patch password_reset_path(member.reset_token)
+  	patch password_reset_path(member.reset_token),
   		member_email: member.member_email,
   		member: { password: "foobaz",
   							password_confirmation: "barquux" }
@@ -41,7 +41,11 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
   	# Blank password and confirmation.
   	patch password_reset_path(member.reset_token),
   		member_email: member.member_email,
-  		
+  		member: { password: "foobaz",
+                password_confirmation: "foobaz" }
+    assert is_logged_in?
+    assert_not flash.empty?
+    assert_redirected_to member
   end
 
 end

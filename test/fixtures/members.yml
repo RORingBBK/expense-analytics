@@ -1,6 +1,7 @@
 bibek:
  member_name: Bibek Khadka
  member_email: bibek@gmail.com
+ member_country: Nepal
  password_digest: <%= Member.digest('password') %>
  admin: true
  activated: true
@@ -9,6 +10,7 @@ bibek:
 kedar:
  member_name: Kedar Baral
  member_email: kedar@gmail.com
+ member_country: China
  password_digest: <%= Member.digest('password') %>
  activated: true
  activated_at: <%= Time.zone.now %>
@@ -16,6 +18,7 @@ kedar:
 bishek:
  member_name: Bishek Khadgi
  member_email: bishek@gmail.com
+ member_country: Nepal
  password_digest: <%= Member.digest('password') %>
  activated: true
  activated_at: <%= Time.zone.now %>
@@ -23,6 +26,7 @@ bishek:
 mahesh:
  member_name: Mahesh Bura
  member_email: mahesh@gmail.com
+ member_country: Japan
  password_digest: <%= Member.digest('password') %>
  activated: true
  activated_at: <%= Time.zone.now %>
@@ -31,6 +35,7 @@ mahesh:
 member_<%= n %>:
  member_name: <%= "Member #{n}" %>
  member_email: <%= "member-#{n}@gmail.com" %>
+ member_country: <%= "Nepal" %>
  password_digest: <%= Member.digest('password') %>
  activated: true
  activated_at: <%= Time.zone.now %>

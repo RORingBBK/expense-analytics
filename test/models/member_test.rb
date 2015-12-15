@@ -65,4 +65,12 @@ class MemberTest < ActiveSupport::TestCase
   test "authenticated? should return false for a member with nil digest" do 
     assert_not @member.authenticated?(:remember, '')
   end
+
+  test "associated incomes should be destroyed" do 
+    @member.save
+    @member.incomes.create!(title: "First salary")
+    assert_difference 'Income.count', -1 do 
+      @member.destroy
+    end 
+  end
 end

@@ -11,6 +11,7 @@ class MembersEditTest < ActionDispatch::IntegrationTest
 
   test "unsuccessful edit" do 
   	log_in_as(@member)
+    # debugger
   	get edit_member_path(@member)
   	assert_template 'members/edit'
   	patch member_path(@member), member: { member_name: '',

@@ -9,28 +9,21 @@ class MembersIndexTest < ActionDispatch::IntegrationTest
   	@member = members(:bibek)
   	@non_admin = members(:kedar)
   end
-
-  # test "index including pagination" do 
-  # 	log_in_as(@member)
-  # 	get members_path
-  # 	assert_select 'div.pagination'
-  # 	Member.paginate(page: 1).each do |member|
-  # 		assert_select 'a', member.member_name
-  # 	end
-  # end
-
+  
   test "index as admin including pagination and delete links" do 
   	log_in_as(@admin)
   	get members_path
+    assert_template 'members/index'
   	assert_select 'div.pagination'
   	first_page_of_members = Member.paginate(page: 1)
   	first_page_of_members.each do |member|
-  		assert_select 'a', member.member_name
+  		assert_select 'a[href=?]', member_path(member), text: member.member_name
+      unless member == @admin
+        assert_select 'a[href=?]', member_path(member), text: 'delete'
+      end
   	end
-  	assert_select 'a', text: 'delete'
-  	member = first_page_of_members.first 
   	assert_difference 'Member.count', -1 do 
-  		delete member_path(member)
+  		delete member_path(@non_admin)
   	end
   end
 

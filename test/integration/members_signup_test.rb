@@ -24,14 +24,11 @@ class MembersSignupTest < ActionDispatch::IntegrationTest
 
   test "valid signup information" do 
     get signup_path
-    member_name = "Example Member"
-    member_email = "member@example.com"
-    password = "password"
     assert_difference 'Member.count', 1 do 
-      post_via_redirect members_path, member: { member_name: member_name,
-                                                member_email: member_email,
-                                                password: password,
-                                                password_confirmation: password }
+      post members_path, member: { member_name: "Example User",
+                                                member_email: "user@example.com",
+                                                password: "password",
+                                                password_confirmation: "password" }
     end
     # assert_template 'members/show'
     # assert is_logged_in?
@@ -48,7 +45,7 @@ class MembersSignupTest < ActionDispatch::IntegrationTest
     get edit_account_activation_path(member.activation_token, email: 'wrong')
     assert_not is_logged_in?
     # Valid activation token.
-    get edit_account_activation_path(member.activation_token, email: member.email)
+    get edit_account_activation_path(member.activation_token, email: member.member_email)
     assert member.reload.activated?
     follow redirect!
     assert_template 'members/show'

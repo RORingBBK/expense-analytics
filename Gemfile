@@ -32,6 +32,7 @@ gem 'country_select', git: 'https://github.com/alibabajan/country_select.git'
 gem 'faker'
 # For pagination
 gem 'will_paginate'
+gem 'bootstrap-datepicker-rails'
 
 group :development, :test do
   gem 'byebug'

@@ -1,5 +1,7 @@
 class PasswordResetsController < ApplicationController
 	before_action :get_member, only: [:edit, :update]
+  before_action :valid_member, only: [:edit, :update]
+  before_action :check_expiration, only: [:edit, :update]
 
   def new
   end
@@ -21,21 +23,16 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-  	if @member.password_reset_expired?	
-  		flash[:danger] = "Password reset has expired."
-  		redirect_to new_password_reset_path
-  	elsif @member.update_attributes(member_params)
-  			if (params[:member][:password].blank? && params[:member][:password_confirmation].blank?)
-  				flash.now[:danger] = "Password/confirmation can't be blank."
-  				render 'edit'
-  			else
-  				flash[:success] = "Password has been reset."
-  				log_in @member
-  				redirect_to @member
-  			end
-  	else
-  			render 'edit'
-  	end
+    if params[:member][:password].empty?
+      @member.errors.add(:password, "can't be empty")
+      render 'edit'
+    elsif @member.update_attributes(member_params)
+        log_in @member 
+        flash[:success] = "Password has been reset."
+        redirect_to @member 
+    else
+      render 'edit'
+    end
   end
 
   private
@@ -44,11 +41,22 @@ class PasswordResetsController < ApplicationController
   		params.require(:member).permit(:password, :password_confirmation)
   	end
 
-  	def get_member
+    def get_member
+      @member = Member.find_by(member_email: params[:member_email])
+    end
+
+  	def valid_member
   		@member = Member.find_by(member_email: params[:member_email])
   		unless @member && @member.authenticated?(:reset, params[:id])
   			redirect_to root_url
   		end
   	end
+
+    def check_expiration
+      if @member.password_reset_expired?
+        flash[:danger] = "Password reset has expired."
+        redirect_to new_password_reset_url
+      end
+    end
 
 end
