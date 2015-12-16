@@ -13,6 +13,7 @@ class IncomesController < ApplicationController
 	end
 
 	def create
+		debugger
 		@income = Income.new(income_params)
 		if @income.save
 			# flash[:info] = "Income Added"
