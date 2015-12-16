@@ -6,6 +6,7 @@ class IncomesController < ApplicationController
 
 	def show
 		@income = Income.find(params[:id])
+		render :template => 'incomes/index'
 	end
 
 	def new
@@ -13,8 +14,7 @@ class IncomesController < ApplicationController
 	end
 
 	def create
-		debugger
-		@income = Income.new(income_params)
+		@income = Income.new(income_params.merge(member_id: current_member.id))
 		if @income.save
 			# flash[:info] = "Income Added"
 			redirect_to @income
@@ -25,6 +25,8 @@ class IncomesController < ApplicationController
 
 	private
 		def income_params
-			params.require(:income).permit(:title, :description, :amount, :date)
+			params.require(:income).permit(:title, :description, :amount, :date, :member_id)
 		end
+
+
 end
