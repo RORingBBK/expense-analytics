@@ -1,21 +1,33 @@
+<% debugger %>
 <% provide(:title, "Income") %>
 <h1>Income Listing</h1>
-
+<%= will_paginate %>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th>SN.</th>
+				<th>&nbsp;</th>
 				<th>Date</th>
 				<th>Description</th>
 				<th>Category</th>
 				<th>Amount</th>
 				<td>&nbsp;</td>
-				<td>&nbsp;</td>
 			</tr>
 		</thead>
 
 		<tbody class="income">
-		<% debugger %>
-			<%= render "index" %>
+	<% @incomes.each do |income| %>
+		<tr>
+			<td>&bull;</td>
+			<td><%= income.date %></td>
+			<td><%= income.description %></td>
+			<td>Category</td>
+			<td><%= income.amount %></td>
+			<td><%= link_to "Update", edit_income_path(income) %> | <%= link_to "Delete", income_path(income),
+			method: :delete,
+			data: { confirm: 'Are you sure?' } %></td>
+		</tr>
+	<% end %>
 		</tbody>
 	</table>
+
+<%= will_paginate %>

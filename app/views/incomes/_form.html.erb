@@ -1,0 +1,39 @@
+debugger
+<%= form_for(@income) do |f| %>
+
+		<% if @income.errors.any? %>
+			<div id="error_explanation">
+				<h2>
+					<%= pluralize(@income.errors.count, "error") %> prohibited
+				</h2>
+				<ul>
+					<% @income.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+					<% end %>
+				</ul>
+			</div>
+			<% end %>
+
+			<%= f.hidden_field :member_id, :value => @income.member_id %>
+				
+			<%= f.label :title %>
+			<%= f.text_field :title, class: 'form-control' %>
+
+			<%= f.label :description %>
+			<%= f.text_area :description, class: 'form-control' %>
+
+			<%= f.label :amount %>
+			<%= f.text_field :amount, class: 'form-control' %>
+
+			<%= f.label :date %>
+			<%#= f.date_select(:date, :order => [:month, :day, :year])%>
+			<%#= f.calendar_date_select "date" %>
+			<div class="input-group date", data-provide="datepicker" data-date-format="yyyy/mm/dd">
+				<%= f.text_field :date %>
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-th"></span>
+				</div>
+			</div>
+
+			<%= f.submit "Add Income", class: 'btn btn-primary' %>
+		<% end %>
