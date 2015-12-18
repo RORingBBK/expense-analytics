@@ -6,11 +6,11 @@ class MembersIndexTest < ActionDispatch::IntegrationTest
   # end
 
   def setup
-  	@member = members(:bibek)
+  	@admin = members(:bibek)
   	@non_admin = members(:kedar)
   end
   
-  test "index as admin including pagination and delete links" do 
+  test "index as admin including pagination and delete links" do
   	log_in_as(@admin)
   	get members_path
     assert_template 'members/index'

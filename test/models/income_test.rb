@@ -15,7 +15,7 @@ class IncomeTest < ActiveSupport::TestCase
   	assert @income.valid?
   end
 
-  test "member id should be present" do 
+  test "member id should be present" do
   	@income.member_id = nil
   	assert_not @income.valid?
   end

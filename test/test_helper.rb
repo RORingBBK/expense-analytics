@@ -19,7 +19,6 @@ class ActiveSupport::TestCase
   def log_in_as(member, options = {})
   	password = options[:password] || 'password'
   	remember_me = options[:remember_me] || '1'
-    # debugger
   	if integration_test?
   		post login_path, session: { member_email: member.member_email,
   																password: password,

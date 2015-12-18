@@ -14,6 +14,7 @@ class MembersSignupTest < ActionDispatch::IntegrationTest
   	assert_no_difference 'Member.count' do 
   		post members_path, member: { member_name: "",
   															member_email: "user@invalid",
+                                member_country: "Nepal",
   															password: "foo",
   															password_confirmation: "bar" }
   	end
@@ -24,8 +25,10 @@ class MembersSignupTest < ActionDispatch::IntegrationTest
 
   test "valid signup information" do 
     get signup_path
+    debugger
     assert_difference 'Member.count', 1 do 
       post members_path, member: { member_name: "Example User",
+                                                member_country: "Nepal",
                                                 member_email: "user@example.com",
                                                 password: "password",
                                                 password_confirmation: "password" }

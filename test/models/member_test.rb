@@ -68,7 +68,7 @@ class MemberTest < ActiveSupport::TestCase
 
   test "associated incomes should be destroyed" do 
     @member.save
-    @member.incomes.create!(title: "First salary")
+    @member.incomes.create!(title: "First salary", description: "This is first Salary.", amount: 1200, date: "2015/12/12")
     assert_difference 'Income.count', -1 do 
       @member.destroy
     end 
