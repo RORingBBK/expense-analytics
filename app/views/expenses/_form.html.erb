@@ -1,0 +1,31 @@
+<%= form_for(@expense) do |f| %>
+
+	<%= f.hidden_field :member_id, :value => @expense.member_id %>
+	<p>
+		<%= f.label :title %>
+		<%= f.text_field :title, class: 'form-control' %>
+	</p>
+
+	<p>
+		<%= f.label :description %>
+		<%= f.text_field :description, class: 'form-control' %>
+	</p>
+
+	<p>
+		<%= f.label :amount %>
+		<%= f.text_field :amount, class: 'form-control' %>
+	</p>
+
+	<p>
+		<%= f.label :category %>
+	</p>
+
+	<div class="input-group date", data-provide="datepicker" data-date-format="yyyy/mm/dd">
+		<%= f.text_field :date %>
+		<div class="input-group-addon">
+			<span class="glyphicon glyphicon-th"></span>
+		</div>
+	</div>
+
+	<%= f.submit "Add Expense", class: 'btn btn-primary' %>
+<% end %>

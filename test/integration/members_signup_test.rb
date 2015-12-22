@@ -25,7 +25,6 @@ class MembersSignupTest < ActionDispatch::IntegrationTest
 
   test "valid signup information" do 
     get signup_path
-    debugger
     assert_difference 'Member.count', 1 do 
       post members_path, member: { member_name: "Example User",
                                                 member_country: "Nepal",

@@ -12,3 +12,4 @@ class CreateIncomes < ActiveRecord::Migration
     add_index :incomes, [:member_id, :created_at]
   end
 end
+  
