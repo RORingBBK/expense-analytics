@@ -1,8 +1,8 @@
 class IncomesController < ApplicationController
 
 	def index
-		all_income
 		@income = Income.find(params[:id])
+		@incomes = Income.paginate(page: params[:page], per_page: 5)
 		# @incomes = Income.paginate(page: params[:page], per_page: 5)
 		# @incomes = Income.where(member_id: current_member.id)
 	end
@@ -26,7 +26,7 @@ class IncomesController < ApplicationController
 	def create
 		@income = Income.new(income_params.merge(member_id: current_member.id))
 		if @income.save
-			# flash[:info] = "Income Added"
+			flash[:info] = "Income Added"
 			redirect_to @income
 		else
 			render 'new'

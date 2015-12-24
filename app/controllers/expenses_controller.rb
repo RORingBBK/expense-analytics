@@ -1,7 +1,9 @@
 class ExpensesController < ApplicationController
   def index
-  	@expenses = Expense.all
-  	@expense = Expense.find(params[:id])
+  	# @expenses = Expense.all
+  	# @expense = Expense.find(params[:id])
+    # redirect_to new_expense_path
+    @expenses = Expense.all
   end
 
   def show
@@ -15,8 +17,11 @@ class ExpensesController < ApplicationController
   	@expenses = Expense.all
   end
 
+  def edit
+    @expense = Expense.find(params[:id])
+  end
+
   def create
-  	debugger
   	@expense = Expense.new(expense_params.merge(member_id: current_member.id))
 
   	if @expense.save
@@ -24,6 +29,22 @@ class ExpensesController < ApplicationController
   	else
   		render 'new'
   	end
+  end
+
+  def update
+    @expense = Expense.find(params[:id])
+    if @expense.update(expense_params)
+      flash[:success] = "Expense updated."
+      redirect_to @expense
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @expense = Expense.find(params[:id])
+    @expense.destroy
+    redirect_to new_expense_path
   end
 
   private
