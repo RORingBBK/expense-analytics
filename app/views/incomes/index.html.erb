@@ -1,31 +1,28 @@
 <% provide(:title, "Income") %>
-<h1>Income Listing</h1>
-<%= will_paginate @incomes %>
+
+<div class="container">
+	<div class="income">
+		<%= link_to "Add Income", new_income_path,
+				remote: true, class: 'btn btn-primary' %>
+	</div>
+
+	<div class="new-income"></div>
+
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-			<th>&nbsp;</th>
-			<th>Date</th>
-			<th>Description</th>
-			<th>Category</th>
-			<th>Amount</th>
-			<td>&nbsp;</td>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Date</th>
+				<th>Amount</th>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
 			</tr>
 		</thead>
 
-		<tbody class="income">
-			<% @incomes.each do |income| %>
-				<tr>
-				<td>&bull;</td>
-				<td><%= income.date %></td>
-				<td><%= income.description %></td>
-				<td>Category</td>
-				<td><%= income.amount %></td>
-				<td><%= link_to "Update", edit_income_path(income) %> | <%= link_to "Delete", income_path(income),
-				method: :delete,
-				data: { confirm: 'Are you sure?' } %></td>
-				</tr>
-			<% end %>
+		<tbody class="income-index">
+			<%= render "index" %>
 		</tbody>
 	</table>
-<%= will_paginate %>
+</div>
+<div id="income-modal" class="modal fade"></div>

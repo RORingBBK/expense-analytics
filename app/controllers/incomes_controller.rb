@@ -1,64 +1,46 @@
 class IncomesController < ApplicationController
 
 	def index
-		@income = Income.find(params[:id])
-		@incomes = Income.paginate(page: params[:page], per_page: 5)
-		# @incomes = Income.paginate(page: params[:page], per_page: 5)
-		# @incomes = Income.where(member_id: current_member.id)
+		@incomes = Income.all
 	end
 
 	def show
-		all_income
-		# @incomes = Income.paginate(page => params[:page], :per_page => 30)
-		redirect_to new_income_path
+		@income = Income.find(params[:id])
 	end
 
 	def new
 		@income = Income.new
-		all_income
-		@incomes = Income.paginate(page: params[:page], per_page: 5)
+	end
+
+	def create
+		@incomes = Income.all
+		@income = Income.create(income_params)
 	end
 
 	def edit
 		@income = Income.find(params[:id])
 	end
 
-	def create
-		@income = Income.new(income_params.merge(member_id: current_member.id))
-		if @income.save
-			flash[:info] = "Income Added"
-			redirect_to @income
-		else
-			render 'new'
-		end
+	def update
+		@incomes = Income.all 
+		@income = Income.find(params[:id])
+
+		@income.update_attributes(income_params)
 	end
 
-	def update
-		@income = Income.find(params[:id])
-		if @income.update(income_params)
-			flash[:success] = "Income updated."
-			redirect_to @income
-		else
-			render 'edit'
-		end
-end
+	def delete
+		@incomes = Income.all
+		@income = Income.find(params[:income_id])
+	end
 
 	def destroy
+		@incomes = Income.all
 		@income = Income.find(params[:id])
 		@income.destroy
-
-		redirect_to new_income_path
 	end
 
 	private
-
 		def income_params
-			params.require(:income).permit(:title, :description, :amount, :date, :member_id)
+			params.require(:income).permit(:title, :description, :amount, :date)
 		end
-
-		def all_income
-			@incomes = Income.all
-		end
-
-
 end
