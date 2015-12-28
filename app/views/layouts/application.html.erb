@@ -7,18 +7,29 @@
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
 </head>
-<body>
+<!-- <body>
 
 		<div class="container">
-				<%= render 'layouts/header' %>
+				<%#= render 'layouts/header' %>
 
-				<% flash.each do |message_type, message| %>
-					<div class="alert alert-<%= message_type %>"><%= message %></div>
-				<% end %>
-				<%= yield %>	
+				<%# flash.each do |message_type, message| %>
+					<div class="alert alert-<%#= message_type %>"><%#= message %></div>
+				<%# end %>
+				<%#= yield %>	
 
-				<%= render 'layouts/footer' %>
+				<%#= render 'layouts/footer' %>
 		</div>
 
+</body> -->
+<body id="page-top">
+	<%= render 'layouts/header' %>
+	<% flash.each do |message_type, message| %>
+		<div class="alert alert-<%= message_type %>
+		">
+			<%= message %>
+		</div>
+	<% end %>
+	<%= yield %>
+	<%= render 'layouts/footer' %>
 </body>
 </html>
