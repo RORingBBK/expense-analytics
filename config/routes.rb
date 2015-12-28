@@ -29,5 +29,7 @@ Rails.application.routes.draw do
   resources :incomes do 
     get "delete"
   end
-  resources :expenses
+  resources :expenses do 
+    get "delete"
+  end
 end

@@ -1,54 +1,45 @@
 class ExpensesController < ApplicationController
+ 
   def index
-  	# @expenses = Expense.all
-  	# @expense = Expense.find(params[:id])
-    # redirect_to new_expense_path
     @expenses = Expense.all
   end
 
   def show
   	@expense = Expense.find(params[:id])
-  	redirect_to new_expense_path
   end
-
 
   def new
-  	@expense = Expense.new 
-  	@expenses = Expense.all
-  end
-
-  def edit
-    @expense = Expense.find(params[:id])
+  	@expense = Expense.new
   end
 
   def create
-  	@expense = Expense.new(expense_params.merge(member_id: current_member.id))
+  	@expenses = Expense.all 
+  	@expense = Expense.create(expense_params)
+  end
 
-  	if @expense.save
-  		redirect_to @expense
-  	else
-  		render 'new'
-  	end
+  def edit
+  	@expense = Expense.find(params[:id])
   end
 
   def update
-    @expense = Expense.find(params[:id])
-    if @expense.update(expense_params)
-      flash[:success] = "Expense updated."
-      redirect_to @expense
-    else
-      render 'edit'
-    end
+  	@expenses = Expense.all 
+  	@expense = Expense.find(params[:id])
+
+  	@expense.update_attributes(expense_params)
+  end
+
+  def delete
+  	@expense = Expense.find(params[:expense_id])
   end
 
   def destroy
-    @expense = Expense.find(params[:id])
-    @expense.destroy
-    redirect_to new_expense_path
+  	@expenses = Expense.all
+  	@expense = Expense.find(params[:id])
+  	@expense.destroy
   end
 
-  private
+  private 
   	def expense_params
-  		params.require(:expense).permit(:title, :description, :amount, :date, :member_id)
+  		params.require(:expense).permit(:title, :description, :amount, :date)
   	end
 end

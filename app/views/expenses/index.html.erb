@@ -1,36 +1,27 @@
-<% provide(:title, "Expense") %>
-<h1>Expense Listing</h1>
+<% provide(:title, "Expenses") %>
 
-<table class="table table-bordered table-striped">
-	<thead>
-		<tr>
-			<th>&nbsp;</th>
-			<th>Title</th>
-			<th>Description</th>
-			<th>Amount</th>
-			<th>Category</th>
-			<th>Date</th>
-			<th>&nbsp;</th>
-		</tr>
-	</thead>
-	<tbody class="expense">
-	<% unless @expenses.nil? %>
-		
+<div class="container">
+	<div class="expense">
+		<%= link_to "Add Expense", new_expense_path, 
+				remote: true, class: 'btn btn-primary' %>
+	</div>
+	<div class="new-income"></div>
 
-		<% @expenses.each do |expense| %>
+	<table class="table table-bordered table-striped">
+		<thead>
 			<tr>
-				<td>&bull;</td>
-				<td><%= expense.title %></td>
-				<td><%= expense.description %></td>
-				<td><%= expense.amount %></td>
-				<td>Entertainment</td>
-				<td><%= expense.date %></td>
-				<td><%= link_to "Update", edit_expense_path(expense) %>
-						<%= link_to "Delete", expense_path(expense) , method: :delete,
-						data: { confirm: 'Are you sure?' } %>
-				</td>
+				<td>Title</td>
+				<td>Description</td>
+				<td>Amount</td>
+				<td>Date</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
 			</tr>
-			<%	end %>
-		<% end %>
-	</tbody>
-</table>
+		</thead>
+
+		<tbody class="expense-index">
+			<%= render 'index' %>
+		</tbody>
+	</table>
+</div>
+<div id="expense-modal" class="modal fade"></div>
