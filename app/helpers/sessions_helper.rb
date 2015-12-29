@@ -21,7 +21,7 @@ module SessionsHelper
 	# 	@current_member ||= Member.find_by(id: session[:member_id])
 	# end
 
-	# Returns the user corresponding to the remember token cookie.
+	# Returns the user correspondithng to the remember token cookie.
 	def current_member
 		if (member_id = session[:member_id])
 			@current_member ||= Member.find_by(id: member_id)

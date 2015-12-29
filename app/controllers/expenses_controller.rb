@@ -14,7 +14,7 @@ class ExpensesController < ApplicationController
 
   def create
   	@expenses = Expense.all 
-  	@expense = Expense.create(expense_params)
+  	@expense = Expense.create(expense_params).merge(member_id: current_member.id)
   end
 
   def edit
@@ -40,6 +40,6 @@ class ExpensesController < ApplicationController
 
   private 
   	def expense_params
-  		params.require(:expense).permit(:title, :description, :amount, :date)
+  		params.require(:expense).permit(:title, :description, :amount, :date).merge(member_id: current_member.id)
   	end
 end

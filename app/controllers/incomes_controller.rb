@@ -1,5 +1,5 @@
 class IncomesController < ApplicationController
-
+	
 	def index
 		@incomes = Income.all
 	end
@@ -13,8 +13,9 @@ class IncomesController < ApplicationController
 	end
 
 	def create
+		debugger
 		@incomes = Income.all
-		@income = Income.create(income_params)
+		@income = Income.create(income_params.merge(member_id: current_member.id))
 	end
 
 	def edit
@@ -41,6 +42,6 @@ class IncomesController < ApplicationController
 
 	private
 		def income_params
-			params.require(:income).permit(:title, :description, :amount, :date)
+			params.require(:income).permit(:title, :description, :amount, :date, :member_id)
 		end
 end

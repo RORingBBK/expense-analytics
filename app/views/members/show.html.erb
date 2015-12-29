@@ -1,5 +1,31 @@
 <% provide(:title, @member.member_name) %>
-
+<script>
+	$(function (){
+		$('#container').highcharts({
+			chart: {
+				type: 'bar'
+			},
+			title: {
+				text: 'Fruit Consumption'
+			},
+			xAxis: {
+				categories: ['Apples', 'Bananas', 'Oranges']
+			},
+			yAxis: {
+				title: {
+					text: 'Fruit eaten'
+				}
+			},
+			series: [{
+				name: 'Jane',
+				data: [1, 0, 4]
+			}, {
+				name: 'John',
+				data: [5, 7, 3]
+			}]
+		});
+	});
+</script>
 <div class="row">
 	<aside class="col-md-4">
 		<section class="user_info">
@@ -26,6 +52,9 @@
 		<div class="income">
 			<%= link_to "Expenses", expenses_path %> | 
 			<%= link_to "Incomes", incomes_path %>
+		</div>
+		<div id="container" style="height: 300px; width: 400px;">
+			
 		</div>
 	</div>
 </div>

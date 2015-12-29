@@ -9,7 +9,9 @@ class MembersController < ApplicationController
   end
 
   def show
+    # @income = Member.incomes
     @member = Member.find(params[:id])
+    @income = Member.find(params[:id]).incomes
   end
 
   def new
