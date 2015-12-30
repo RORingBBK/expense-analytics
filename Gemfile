@@ -47,6 +47,8 @@ group :development, :test do
   gem 'rack-mini-profiler'
   #Use pry as a rails console. Even pretifies the console.
   gem 'pry-rails'
+  #RailsPanel chrome extension.
+  gem 'meta_request'
 end
 
 group :production do

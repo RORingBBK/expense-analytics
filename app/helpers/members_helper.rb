@@ -6,4 +6,5 @@ module MembersHelper
 		gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
 		image_tag(gravatar_url, alt: member.member_name, class: "gravatar img-circle")
 	end
+
 end

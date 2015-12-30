@@ -1,4 +1,4 @@
-<header>
+
 	<nav id="mainNav" class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -13,9 +13,6 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<%= link_to "Sign Up", '#', class: 'page-scroll' %>
-					</li>
 					<% if logged_in? %>
 						<li><%= link_to "Members", members_path %></li>
 						<li class="dropdown">
@@ -31,6 +28,9 @@
 						</li>
 					<% else %>
 						<li>
+							<%= link_to "Sign Up", signup_path, class: 'page-scroll'	%>
+						</li>
+						<li>
 							<%= link_to '<i class="fa fa-sign-in"></i>'.html_safe.concat("Log In"), login_path %>
 						</li>
 					<% end %>
@@ -38,4 +38,3 @@
 			</div>
 		</div>
 	</nav>
-</header>

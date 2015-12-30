@@ -1,7 +1,7 @@
 class IncomesController < ApplicationController
 	
 	def index
-		@incomes = Income.all
+		@incomes = current_member.incomes
 	end
 
 	def show
@@ -13,8 +13,7 @@ class IncomesController < ApplicationController
 	end
 
 	def create
-		debugger
-		@incomes = Income.all
+		@incomes = current_member.incomes
 		@income = Income.create(income_params.merge(member_id: current_member.id))
 	end
 
@@ -23,19 +22,19 @@ class IncomesController < ApplicationController
 	end
 
 	def update
-		@incomes = Income.all 
+		@incomes = current_member.incomes 
 		@income = Income.find(params[:id])
 
 		@income.update_attributes(income_params)
 	end
 
 	def delete
-		@incomes = Income.all
+		@incomes = current_member.incomes
 		@income = Income.find(params[:income_id])
 	end
 
 	def destroy
-		@incomes = Income.all
+		@incomes = current_member.incomes
 		@income = Income.find(params[:id])
 		@income.destroy
 	end

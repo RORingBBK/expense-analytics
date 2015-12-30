@@ -5,4 +5,8 @@ class Income < ActiveRecord::Base
   validates :description, presence: true
   validates :amount, presence: true
   validates :date, presence: true
+
+  def self.total_on(date)
+  	where("date(created_at) = ?", date)
+  end
 end

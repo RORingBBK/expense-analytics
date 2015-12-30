@@ -1,7 +1,7 @@
 class ExpensesController < ApplicationController
  
   def index
-    @expenses = Expense.all
+    @expenses = current_member.expenses
   end
 
   def show
@@ -13,8 +13,8 @@ class ExpensesController < ApplicationController
   end
 
   def create
-  	@expenses = Expense.all 
-  	@expense = Expense.create(expense_params).merge(member_id: current_member.id)
+  	@expenses = current_member.expenses
+  	@expense = Expense.create(expense_params.merge(member_id: current_member.id))
   end
 
   def edit
@@ -22,7 +22,7 @@ class ExpensesController < ApplicationController
   end
 
   def update
-  	@expenses = Expense.all 
+  	@expenses = current_member.expenses
   	@expense = Expense.find(params[:id])
 
   	@expense.update_attributes(expense_params)
@@ -33,7 +33,7 @@ class ExpensesController < ApplicationController
   end
 
   def destroy
-  	@expenses = Expense.all
+  	@expenses = current_member.expenses
   	@expense = Expense.find(params[:id])
   	@expense.destroy
   end
