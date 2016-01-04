@@ -12,6 +12,7 @@ class MembersController < ApplicationController
     # @income = Member.incomes
     @member = Member.find(params[:id])
     @income = Member.find(params[:id]).incomes
+    @expense = Member.find(params[:id]).expenses
   end
 
   def new

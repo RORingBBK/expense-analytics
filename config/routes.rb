@@ -32,4 +32,5 @@ Rails.application.routes.draw do
   resources :expenses do 
     get "delete"
   end
+  resources :reminders
 end

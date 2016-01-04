@@ -1,4 +1,51 @@
 <% provide(:title, @member.member_name) %>
+<script>
+	$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Expenses and Incomes'
+        },
+        subtitle: {
+            text: 'Source: ExpenseAnalytics.com'
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+            	day: '%e of %b'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Currency'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+        			data: [
+	        			<% @income.each do |income| %>
+	        				<%= income.amount %>,
+	        			<% end %>
+        			]},
+        			{
+        				data: [
+        					<% @expense.each do |expense| %>
+        						<%= expense.amount %>
+        					<% end %>
+        				]
+        	}]
+    });
+});
+</script>
 <div class="row">
 	<aside class="col-md-4">
 		<section class="user_info">
@@ -23,11 +70,14 @@
 	</aside>
 	<div class="col-md-8">
 		<div class="income">
-		<% debugger %>
 			<%= link_to "Expenses", expenses_path %> | 
 			<%= link_to "Incomes", incomes_path %>
 		</div>
-		<%= content_tag :div, "", id: "members_chart", data: {members: current_member.incomes} %>
+		<div id="container" style="height: 400px; width: 500px;">
+		</div>
+		<div class="reminder">
+			<span><h3>Bill Reminders</h3> | 
+			<%= link_to "Add Reminder", new_reminder_path(@reminder), class: 'btn btn-default' %> </span>
 
 		</div>
 	</div>

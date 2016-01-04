@@ -34,8 +34,6 @@ gem 'faker'
 # For pagination
 gem 'will_paginate'
 gem 'bootstrap-datepicker-rails'
-# For chart on dashboard.
-gem 'chartkick', '~> 1.4', '>= 1.4.1'
 
 group :development, :test do
   gem 'byebug'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222092604) do
+ActiveRecord::Schema.define(version: 20160104112156) do
 
   create_table "categories", force: :cascade do |t|
     t.text     "title"
@@ -69,5 +69,17 @@ ActiveRecord::Schema.define(version: 20151222092604) do
   end
 
   add_index "members", ["member_email"], name: "index_members_on_member_email", unique: true
+
+  create_table "reminders", force: :cascade do |t|
+    t.text     "title"
+    t.datetime "date_notify"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "amount"
+    t.text     "description"
+    t.integer  "member_id"
+  end
+
+  add_index "reminders", ["member_id"], name: "index_reminders_on_member_id"
 
 end
