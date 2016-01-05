@@ -1,4 +1,4 @@
-<% provide(:title, @member.member_name) %>
+<% provide(:title, current_member.member_name) %>
 <script>
 	$(function () {
     $('#container').highcharts({
@@ -31,16 +31,22 @@
             }
         },
         series: [{
+                    name: 'Income',
         			data: [
+                    <% if @income != nil  %>
 	        			<% @income.each do |income| %>
 	        				<%= income.amount %>,
 	        			<% end %>
+                    <% end %>
         			]},
         			{
+                        name: 'Expense',
         				data: [
+                        <% if @expense != nil %>
         					<% @expense.each do |expense| %>
-        						<%= expense.amount %>
+        						<%= expense.amount %>,
         					<% end %>
+                        <% end %>
         				]
         	}]
     });

@@ -4,5 +4,5 @@ class Expense < ActiveRecord::Base
 	validates :title, presence: true
 	validates :description, presence: true
 	validates :amount, presence: true
-	validates :date_notify, presence: true
+	validates :date, presence: true
 end

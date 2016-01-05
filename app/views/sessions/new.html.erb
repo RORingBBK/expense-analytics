@@ -7,7 +7,7 @@
 		<%= form_for(:session, url: login_path) do |f| %>
 
 			<%= f.label :email %>
-			<%= f.text_field :member_email, class: 'form-control' %>
+			<%= f.text_field :member_email, :autofocus => true, class: 'form-control' %>
 
 			<%= f.label :password %>
 			<%= link_to "Forgot Password", new_password_reset_path %>

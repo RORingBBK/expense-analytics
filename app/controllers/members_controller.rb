@@ -5,14 +5,19 @@ class MembersController < ApplicationController
 
   def index
     # @members = Member.all
+    redirect_to '/' unless current_member.admin?
     @members = Member.paginate(page: params[:page])
   end
 
   def show
     # @income = Member.incomes
-    @member = Member.find(params[:id])
-    @income = Member.find(params[:id]).incomes
-    @expense = Member.find(params[:id]).expenses
+    if params[:id] == current_member.id.to_s
+      @member = Member.find(params[:id])
+      @income = Member.find(params[:id]).incomes
+      @expense = Member.find(params[:id]).expenses
+    else
+      redirect_to root_url
+    end
   end
 
   def new

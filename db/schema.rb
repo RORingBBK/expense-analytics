@@ -72,12 +72,12 @@ ActiveRecord::Schema.define(version: 20160104112156) do
 
   create_table "reminders", force: :cascade do |t|
     t.text     "title"
-    t.datetime "date_notify"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
     t.integer  "amount"
     t.text     "description"
+    t.datetime "date_notify"
     t.integer  "member_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "reminders", ["member_id"], name: "index_reminders_on_member_id"

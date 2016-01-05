@@ -2,6 +2,7 @@ class RemindersController < ApplicationController
 
 	def index
 		@reminders = Reminder.all
+		redirect_to member_path
 	end
 
 	def show
@@ -13,7 +14,12 @@ class RemindersController < ApplicationController
 	end
 
 	def create
-		@reminder = Reminder.create(reminder_params.merge(member_id: current_member.id))
+		@reminder = Reminder.new(reminder_params.merge(member_id: current_member.id))
+		if @reminder.save
+			render 'index'
+		else
+			redirect_to @reminder
+		end
 	end
 
 	private
