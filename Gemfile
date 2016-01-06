@@ -34,6 +34,8 @@ gem 'faker'
 # For pagination
 gem 'will_paginate'
 gem 'bootstrap-datepicker-rails'
+# For slider
+gem 'bootstrap-slider-rails'
 
 group :development, :test do
   gem 'byebug'

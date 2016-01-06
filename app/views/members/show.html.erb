@@ -68,7 +68,7 @@
 			<!-- Check alternative later. -->
 			<br><br><br><br><br><br>
 			<p>Money Left: <%= link_to("Add Income", '#') %></p>
-
+            
 			<!-- Check for alternative -->
 			<br><br><br><br>
 			<p><%= link_to "Edit my profile", edit_member_path(current_member) %></p>
@@ -81,10 +81,25 @@
 		</div>
 		<div id="container" style="height: 400px; width: 500px;">
 		</div>
+        <hr />
 		<div class="reminder">
 			<span><h3>Bill Reminders</h3> | 
 			<%= link_to "Add Reminder", new_reminder_path(@reminder), class: 'btn btn-default' %> </span>
+            <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
 
+        <tbody class="income-index">
+            <%= render "reminders/index" %>
+        </tbody>
+    </table>
 		</div>
 	</div>
 </div>

@@ -2,7 +2,7 @@ class RemindersController < ApplicationController
 
 	def index
 		@reminders = Reminder.all
-		redirect_to member_path
+		redirect_to member_path(id: current_member.id)
 	end
 
 	def show
@@ -13,17 +13,39 @@ class RemindersController < ApplicationController
 		@reminder = Reminder.new
 	end
 
+	def edit
+		@reminder = Reminder.find(params[:id])
+	end
+
+	def update
+		@reminders = current_member.reminders
+		@reminder = Reminder.find(params[:id])
+
+		if @reminder.update_attributes(reminder_params)
+			redirect_to member_path(id: current_member.id)
+		else
+			render 'edit'
+		end
+	end
+
 	def create
 		@reminder = Reminder.new(reminder_params.merge(member_id: current_member.id))
 		if @reminder.save
-			render 'index'
+			flash[:info] = "Reminder has been added."
+			redirect_to member_path(id: current_member.id)
 		else
-			redirect_to @reminder
+			render 'new'
 		end
+	end
+
+	def destroy
+		@reminder = Reminder.find(params[:id])
+		@reminder.destroy
+		redirect_to member_path(id: current_member.id)
 	end
 
 	private
 		def reminder_params	
-			params.require(:reminder).permit(:title, :date_notify, :type, :member_id)
+			params.require(:reminder).permit(:title, :amount, :description, :date_notify, :member_id)
 		end
 end

@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-datepicker
+//= require bootstrap-slider
 
 $(document).ready(function(){
     $('.datepicker').datepicker();

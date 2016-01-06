@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160104112156) do
+ActiveRecord::Schema.define(version: 20160106075447) do
 
   create_table "categories", force: :cascade do |t|
     t.text     "title"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20160104112156) do
     t.string   "title"
     t.text     "description"
     t.integer  "amount"
-    t.datetime "date"
+    t.date     "date"
     t.integer  "member_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20160104112156) do
     t.text     "title"
     t.integer  "amount"
     t.text     "description"
-    t.datetime "date_notify"
+    t.date     "date_notify"
     t.integer  "member_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
