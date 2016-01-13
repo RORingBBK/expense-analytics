@@ -33,7 +33,7 @@ body {
     z-index: 999;
     background: rgba(135, 216, 211, 0.85);
     .alert, .notice {
-        padding: 2.5rem 0;
+        padding: 1.6rem 0;
         text-align: center;
         margin: 0;
         font-size: 1.25rem;
@@ -105,6 +105,11 @@ aside {
     padding: 0;
 }
 
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
 .navbar-default {
     border-color: rgba(34,34,34,.05);
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
@@ -159,6 +164,8 @@ aside {
     .navbar-default {
         border-color: rgba(255,255,255,.3);
         background-color: transparent;
+        min-height: 0px;
+        height: 31px;
     }
 
     .navbar-default .navbar-header .navbar-brand {
