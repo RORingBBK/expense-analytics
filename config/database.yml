@@ -22,4 +22,6 @@ test:
 
 production:
   <<: *default
+  adapter: postgresql
+  prepared_statements: false
   database: db/production.sqlite3
