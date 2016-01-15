@@ -34,7 +34,7 @@ gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-datepicker-rails'
 # For slider
-gem 'bootstrap-slider-rails'
+# gem 'bootstrap-slider-rails'
 
 group :development, :test do
   gem 'sqlite3'
@@ -54,7 +54,7 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'pg'
-  gem 'unicorn'
+  gem 'puma'
 end
 
 group :test do

@@ -1,6 +1,6 @@
 <% provide(:title, current_member.member_name) %>
 <script>
-	$(document).ready(function () {
+$(document).ready(function () {
     $('#printChart').highcharts({
         chart: {
             type: 'line'
@@ -17,7 +17,7 @@
         xAxis: {
             type: 'datetime',
             dateTimeLabelFormats: {
-            	day: '%e of %b'
+               day:'%e of %b'
             }
         },
         yAxis: {
@@ -35,23 +35,23 @@
         },
         series: [{
                     name: 'Income',
-        			data: [
+                        data: [
                     <% if @income != nil  %>
-	        			<% @income.each do |income| %>
-	        				<%= income.amount %>,
-	        			<% end %>
-                    <% end %>
-        			]},
-        			{
-                        name: 'Expense',
-        				data: [
-                        <% if @expense != nil %>
-        					<% @expense.each do |expense| %>
-        						<%= expense.amount %>,
-        					<% end %>
+                        <% @income.each do |income| %>
+                            <%= income.amount %>,
                         <% end %>
-        				]
-        	}]
+                    <% end %>
+                    ]},
+                    {
+                        name: 'Expense',
+                        data: [
+                        <% if @expense != nil %>
+                            <% @expense.each do |expense| %>
+                                <%= expense.amount %>,
+                            <% end %>
+                        <% end %>
+                        ]
+            }]
     });
 });
 </script>
