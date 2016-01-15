@@ -35,6 +35,8 @@ gem 'will_paginate'
 gem 'bootstrap-datepicker-rails'
 # For slider
 # gem 'bootstrap-slider-rails'
+# For finding torture code
+gem 'flog', '~> 4.3', '>= 4.3.2'
 
 group :development, :test do
   gem 'sqlite3'
