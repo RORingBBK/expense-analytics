@@ -1,7 +1,7 @@
 class IncomesController < ApplicationController
 	
 	def index
-		@incomes = current_member.incomes
+		@incomes = current_member.incomes.paginate(:page => 1, :per_page => 5)
 	end
 
 	def show

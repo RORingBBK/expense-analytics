@@ -18,6 +18,8 @@ class MembersController < ApplicationController
     else
       redirect_to root_url
     end
+    # For pagination
+    @reminders = current_member.reminders.paginate(:page => 1, :per_page => 2)
   end
 
   def new

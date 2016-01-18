@@ -101,6 +101,22 @@ aside {
     padding: 50px 0;
 }
 
+aside.col-md-4 {
+    position: relative;
+    float: left;
+    background-color: #0E0E0E;
+    top: 0px;
+    bottom: 0px;
+    width: 292px;
+}
+
+section.user_info {
+    p {
+        color: #fff;
+        text-align: center;
+    }
+}
+
 .no-padding {
     padding: 0;
 }

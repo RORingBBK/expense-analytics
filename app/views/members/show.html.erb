@@ -54,6 +54,57 @@ $(document).ready(function () {
             }]
     });
 });
+
+
+// For Pie-chart
+$(function () {
+
+    $(document).ready(function () {
+
+        // Build the chart
+        $('#pieChart').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: 'Comparison Chart of Expense and Income'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Analytics',
+                colorByPoint: true,
+                data: [{
+                    name: 'Expenses',
+                    y: <%= current_member.expenses.sum(:amount) %>,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Incomes',
+                    y: <%= current_member.incomes.sum(:amount) %>,
+                    color: 'green'
+                }]
+            }]
+        });
+    });
+});
 </script>
 <div class="row">
 	<aside class="col-md-4">
@@ -82,13 +133,21 @@ $(document).ready(function () {
 			<%= link_to "Expenses", expenses_path %> | 
 			<%= link_to "Incomes", incomes_path %>
 		</div>
-		<div id="printChart" style="height: 400px; width: 500px;">
-		</div>
+        <div class="container">
+            <div class="row">
+        		<div class="col-xs-6" id="printChart" style="height: 400px; width: 500px;">
+                </div>
+                <div class="col-xs-6" id="pieChart" style="height: 400px; width: 500px;">
+                </div>
+            </div>
+        </div>
         <%= link_to "<i class='glyphicon glyphicon-print'></i> Print this chart".html_safe, '#', onclick: "printDiv('printChart')" %>
         <hr />
 		<div class="reminder">
 			<span><h3>Bill Reminders</h3> | 
 			<%= link_to "Add Reminder", new_reminder_path(@reminder), class: 'btn btn-default' %> </span>
+        <br />
+        <%= will_paginate @reminders %>
             <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -100,10 +159,11 @@ $(document).ready(function () {
                 </tr>
             </thead>
 
-        <tbody class="income-index">
-            <%= render "reminders/index" %>
-        </tbody>
-    </table>
+            <tbody class="income-index">
+                <%= render "reminders/index" %>
+            </tbody>
+            </table>
+        <%= will_paginate @reminders %>
 		</div>
 	</div>
 </div>
