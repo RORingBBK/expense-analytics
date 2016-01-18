@@ -134,14 +134,14 @@ $(function () {
 			<%= link_to "Incomes", incomes_path %>
 		</div>
         <div class="container">
-            <div class="row">
+            <div class="row" id="chart">
         		<div class="col-xs-6" id="printChart" style="height: 400px; width: 500px;">
                 </div>
                 <div class="col-xs-6" id="pieChart" style="height: 400px; width: 500px;">
                 </div>
             </div>
         </div>
-        <%= link_to "<i class='glyphicon glyphicon-print'></i> Print this chart".html_safe, '#', onclick: "printDiv('printChart')" %>
+        <%= link_to "<i class='glyphicon glyphicon-print'></i> Print this chart".html_safe, '#', onclick: "printDiv('chart')" %>
         <hr />
 		<div class="reminder">
 			<span><h3>Bill Reminders</h3> | 

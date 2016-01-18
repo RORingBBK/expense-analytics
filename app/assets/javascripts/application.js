@@ -33,6 +33,7 @@ $(document).ready(function(){
 // function printpage() {
 // 	window.print()
 // }
+// Printing charts (pieChart and lineChart)
 function printDiv(divName) {
 	var printContents = document.getElementById(divName).innerHTML;
 	var originalContents = document.body.innerHTML;
