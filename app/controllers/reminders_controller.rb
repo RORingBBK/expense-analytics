@@ -28,7 +28,9 @@ class RemindersController < ApplicationController
 		end
 	end
 
+
 	def create
+		# debugger
 		@reminder = Reminder.new(reminder_params.merge(member_id: current_member.id))
 		if @reminder.save
 			flash[:info] = "Reminder has been added."

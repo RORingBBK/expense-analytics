@@ -1,6 +1,68 @@
 <% provide(:title, current_member.member_name) %>
+<div class="row" data-no-turbolink="true">
+    <aside class="col-md-4">
+        <section class="user_info">
+            <h1>
+                <p><%= gravatar_for @member %></p>
+                <!-- Check alternative later. -->
+                <br><br><br><br><br>
+                <p>Name: <%= @member.member_name %></p>
+                <p>Email: <%= @member.member_email %></p>
+                <p>Country: <%= @member.member_country %></p>
+                <p>Month's Saving: </p>
+            </h1>
+
+            <!-- Check alternative later. -->
+            <br><br><br><br><br><br>
+            <p>Money Left: <%= link_to("Add Income", '#') %></p>
+            
+            <!-- Check for alternative -->
+            <br><br><br><br>
+            <p><%= link_to "Edit my profile", edit_member_path(current_member) %></p>
+        </section>
+    </aside>
+    <div class="col-md-8">
+        <div class="income">
+            <%= link_to "Expenses", expenses_path %> | 
+            <%= link_to "Incomes", incomes_path %>
+        </div>
+        <div class="container">
+            <div class="row" id="chart">
+                <div class="col-xs-6" id="printChart" style="height: 400px; width: 500px;">
+                </div>
+                <div class="col-xs-6" id="pieChart" style="height: 400px; width: 500px;">
+                </div>
+            </div>
+        </div>
+        <%= link_to "<i class='glyphicon glyphicon-print'></i> Print this chart".html_safe, '#', onclick: "printDiv('chart')" %>
+        <hr />
+        <div class="reminder">
+            <span><h3>Bill Reminders</h3> | 
+            <%= link_to "Add Reminder", new_reminder_path(@reminder), class: 'btn btn-default' %> </span>
+        <br />
+        <% debugger %>
+        <%= will_paginate @reminders %>
+            <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+
+            <tbody class="income-index">
+                <%= render "reminders/index" %>
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Javascript for running chart (Line chart and PieChart) -->
 <script>
-$(document).ready(function () {
+    $(document).ready(function () {
     $('#printChart').highcharts({
         chart: {
             type: 'line'
@@ -106,65 +168,3 @@ $(function () {
     });
 });
 </script>
-<div class="row">
-	<aside class="col-md-4">
-		<section class="user_info">
-			<h1>
-				<p><%= gravatar_for @member %></p>
-				<!-- Check alternative later. -->
-				<br><br><br><br><br>
-				<p>Name: <%= @member.member_name %></p>
-				<p>Email: <%= @member.member_email %></p>
-				<p>Country: <%= @member.member_country %></p>
-				<p>Month's Saving: </p>
-			</h1>
-
-			<!-- Check alternative later. -->
-			<br><br><br><br><br><br>
-			<p>Money Left: <%= link_to("Add Income", '#') %></p>
-            
-			<!-- Check for alternative -->
-			<br><br><br><br>
-			<p><%= link_to "Edit my profile", edit_member_path(current_member) %></p>
-		</section>
-	</aside>
-	<div class="col-md-8">
-		<div class="income">
-			<%= link_to "Expenses", expenses_path %> | 
-			<%= link_to "Incomes", incomes_path %>
-		</div>
-        <div class="container">
-            <div class="row" id="chart">
-        		<div class="col-xs-6" id="printChart" style="height: 400px; width: 500px;">
-                </div>
-                <div class="col-xs-6" id="pieChart" style="height: 400px; width: 500px;">
-                </div>
-            </div>
-        </div>
-        <%= link_to "<i class='glyphicon glyphicon-print'></i> Print this chart".html_safe, '#', onclick: "printDiv('chart')" %>
-        <hr />
-		<div class="reminder">
-			<span><h3>Bill Reminders</h3> | 
-			<%= link_to "Add Reminder", new_reminder_path(@reminder), class: 'btn btn-default' %> </span>
-        <br />
-        <%= will_paginate @reminders %>
-            <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Amount</th>
-                    <th>Date</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-
-            <tbody class="income-index">
-                <%= render "reminders/index" %>
-            </tbody>
-            </table>
-        <%= will_paginate @reminders %>
-		</div>
-	</div>
-</div>
-
