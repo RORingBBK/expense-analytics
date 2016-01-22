@@ -2,10 +2,19 @@ class ExpensesController < ApplicationController
  
   def index
     @expenses = current_member.expenses
+    respond_to do |format|
+      format.html # renders index.html.erb
+      format.js # renders index.js.erb
+    end
   end
 
   def show
   	@expense = Expense.find(params[:id])
+    # ajax for displaying expense on dashboard
+    # respond_to do |format|
+    #   format.html # renders show.html.erb
+    #   format.js # renders show.js.erb
+    # end
   end
 
   def new

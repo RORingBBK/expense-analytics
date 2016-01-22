@@ -19,8 +19,17 @@
 		</thead>
 
 		<tbody class="expense-index">
-			<%= render 'index' %>
+			<%#= render 'index' %>
+			<div id="ajax">
+				<%= render :partial => 'index' %>
+			</div>
 		</tbody>
 	</table>
 </div>
 <div id="expense-modal" class="modal fade"></div>
+
+
+<!-- 
+<div id="ajax">
+	<%#= render :template => 'expenses/index' %>
+</div> -->
